@@ -51,6 +51,19 @@ services:
         volumes:
             - postgresql_data:/var/lib/postgresql/data
 
+    sonarscanner:
+        image: sonarsource/sonar-scanner-cli
+        depends_on:
+            - sonarqube
+        networks:
+            - app_net
+        environment:
+            SONAR_HOST_URL: "http://sonarqube:9000"
+            SONAR_LOGIN: "sqp_233f25825bc8b3857673a4d409544ef8eb2e581c"
+        volumes:
+            - .:/usr/src
+
+
 volumes:
     uploads:
     logs:
